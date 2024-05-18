@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1500px; /* Set a maximum width */
+            width: 100%;
+            margin: auto;
+            transition: 0.5s;
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: 1fr 50px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        header .shopping {
+            position: relative;
+            text-align: right;
+        }
+
+        header .shopping i {
+            font-size: 40px;
+            color: #007bff;
+        }
+
+        header .shopping span {
+            background: red;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            position: absolute;
+            top: -5px;
+            left: 80%;
+            padding: 3px 7px;
+            font-size: 14px;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        .list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .list .item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #DCE0E1;
+            padding: 5px;
+            box-shadow: 0 5px 50px #757676;
+            letter-spacing: 1px;
+            width: calc(100% - 10px);
+            position: relative;
+            aspect-ratio: 1; /* Keep the items square */
+        }
+
+        .list .item img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1; /* New property to maintain aspect ratio */
+            object-fit: cover;
+        }
+
+        .list .item .title {
+            font-weight: 600;
+        }
+
+        .list .item .price {
+            margin: 10px;
+        }
+
+        .list .item button {
+            background-color: red; /* Change the button background color to red */
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px; /* Add border-radius */
+        }
+
+        .cart {
+            width: 400px;
+            background-color: #353432;
+            color: #eee;
+            position: fixed;
+            top: 0;
+            right: -400px;
+            bottom: 0;
+            display: grid;
+            grid-template-rows: 70px 1fr 70px;
+            transition: .5s;
+        }
+
+        .active .cart {
+            right: 0;
+        }
+
+        .cart h1 {
+            color: red; /* Keep the text color of the Cart h1 to red */
+            font-weight: 100;
+            margin: 0;
+            padding: 0 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Add this line to center the text horizontally */
+        }
+
+        .cart .checkOut {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .cart .checkOut button {
+            background-color: red; /* Change the button background color to red */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart .checkOut button.closeShopping {
+            background-color: #1C1F25;
+        }
+
+        .listCart li {
+            display: grid;
+            grid-template-columns: 100px repeat(3, 1fr);
+            color: #fff;
+            row-gap: 10px;
+        }
+
+        .listCart li div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .listCart li img {
+            width: 90%;
+        }
+
+        .listCart li button {
+            background-color: #fff5;
+            border: none;
+        }
+
+        .listCart .count {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+
+        <!-- Nav items for About Us and Contact Us -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact Us</a>
+            </li>
+        </ul>
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Dropdown and other links -->
+    </div>
+</nav>
+<div class="container">
+    <header class="d-flex justify-content-between align-items-center">
+        <h1>Menu</h1>
+        <span th:object="${userLogin}"></span>
+        <div class="shopping">
+            <!-- Bootstrap cart icon -->
+            <i class="bi bi-cart-fill"></i>
+            <span class="badge bg-primary quantity">0</span>
+        </div>
+    </header>
+
+    <div class="row list">
+        <!-- Your menu items go here -->
+    </div>
+</div>
+
+<div class="cart">
+    <h1>Cart</h1>
+    <ul class="listCart">
+    </ul>
+    <div class="checkOut">
+        <div class="total">0</div>
+        <button class="closeShopping">Close</button>
+        <button class="clearCart btn btn-warning">Clear Cart</button>
+        <a href="/summary"><button class="checkoutBtn">Checkout</button></a>
+    </div>
+</div>
+
+<script>
+    let openShopping = document.querySelector('.shopping');
+    let closeShopping = document.querySelector('.closeShopping');
+    let list = document.querySelector('.list');
+    let listCart = document.querySelector('.listCart');
+    let body = document.querySelector('body');
+    let total = document.querySelector('.total');
+    let quantity = document.querySelector('.quantity');
+    let cart = [];
+
+    openShopping.addEventListener('click', () => {
+        body.classList.add('active');
+    });
+
+    closeShopping.addEventListener('click', () => {
+        body.classList.remove('active');
+    });
+
+    let products = [
+        {
+            productId: 1,
+            productName: '1. POLONY + CHIPS',
+            price: 17
+        },
+        {
+            productId: 2,
+            productName: '2. SPECIAL GARLIC + CHIPS',
+            price: 20
+        },
+        {
+            productId: 3,
+            productName: '3. POLONY + CHEESE OR VIENNA',
+            price: 23
+        },
+        {
+            productId: 4,
+            productName: '4. CHEESE + SPECIAL GARLIC',
+            price: 25
+        },
+        {
+            productId: 5,
+            productName: '5. CHEESE + EGG + BURGER FLAVOUR FRENCH',
+            price: 27
+        },
+        {
+            productId: 6,
+            productName: '6. SPECIAL GARLIC + CHEESE + VIENNA',
+            price: 28
+        },
+        {
+            productId: 7,
+            productName: '7A. BURGER FLAVOUR FRENCH + CHEESE + RUSSIAN',
+            price: 33
+        },
+        {
+            productId: 8,
+            productName: '7B. 2 x SPECIAL GARLIC + EGG + RUSSIAN',
+            price: 33
+        },
+        {
+            productId: 9,
+            productName: '8. POLONY + 2 x SPECIAL GARLIC + EGG + CHEESE + BURGER',
+            price: 36
+        },
+        {
+            productId: 10,
+            productName: '9. BURGER FLAVOUR FRENCH + CHEESE + EGG + VIENNA',
+            price: 38
+        },
+        {
+            productId: 11,
+            productName: '10. SPECIAL GARLIC + BURGER FLAVOUR FRENCH + EGG + CHEESE + RUSSIAN ',
+            price: 44
+        },
+        {
+            productId: 12,
+            productName: '11. SPECIAL GARLIC + BURGER FLAVOUR FRENCH + CHEESE + EGG + CHEESE + BURGER + VIENNA',
+            price: 52
+        },
+        {
+            productId: 13,
+            productName: '12. ALL IN ONE',
+            price: 60
+        }
+    ];
+
+    function initApp() {
+        products.forEach((product, index) => {
+            let newDiv = document.createElement('div');
+            newDiv.classList.add('col-lg-4', 'item');
+            newDiv.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${product.productName}</h5> <!-- Corrected product name reference -->
+                    <p class="card-text">Price: R${product.price.toFixed(2)}</p>
+                    <button class="btn btn-primary" onclick="addToCart(${index})">Add To Cart</button>
+                </div>
+            </div>`;
+            list.appendChild(newDiv);
+        });
+    }
+    initApp();
+
+    function addToCart(index) {
+        let product = products[index];
+        let existingItem = cart.find(item => item.productId === product.productId);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cart.push({
+                productId: product.productId,
+                productName: product.productName,
+                price: product.price,
+                quantity: 1
+            });
+        }
+        reloadCart();
+        updateLocalStorage(); // Call this function to update localStorage after adding an item
+    }
+
+    let clearCartButton = document.querySelector('.clearCart');
+    clearCartButton.addEventListener('click', clearCart);
+
+    function clearCart() {
+        cart = []; // Clear the cart array
+        reloadCart(); // Update the cart display
+        updateLocalStorage(); // Clear the cart data from localStorage
+        // Optionally, provide feedback to the user that the cart has been cleared
+        alert('The cart has been cleared!');
+    }
+
+    function updateLocalStorage() {
+        if (cart.length === 0) {
+            localStorage.removeItem('cart');
+            localStorage.removeItem('totalPrice');
+        } else {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            let totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load cart from localStorage if it exists
+        const storedCart = JSON.parse(localStorage.getItem('cart'));
+        if (storedCart && storedCart.length > 0) {
+            cart = storedCart; // Set the cart to the stored cart
+            reloadCart(); // Reload the cart UI with the stored cart items
+        }
+
+        initApp(); // Initialize the app to display products
+    });
+
+    function reloadCart() {
+        listCart.innerHTML = '';
+        let totalPrice = 0;
+        let count = 0;
+        // If the cart is empty, skip the forEach loop and just update the totals
+        if (cart.length === 0) {
+            total.textContent = `R${totalPrice.toFixed(2)}`;
+            quantity.textContent = count;
+        } else {
+            cart.forEach(item => {
+                let newDiv = document.createElement('li');
+                newDiv.innerHTML = `
+            <div>${item.productName}</div>
+            <div>R${(item.price * item.quantity).toFixed(2)}</div>
+            <div class="quantity">
+                <button onclick="changeQuantity(${item.productId}, -1)" class="btn btn-secondary">-</button>
+                <span class="count">${item.quantity}</span>
+                <button onclick="changeQuantity(${item.productId}, 1)" class="btn btn-secondary">+</button
+            </div>`;
+                listCart.appendChild(newDiv);
+                totalPrice += item.price * item.quantity;
+                count += item.quantity;
+            });
+            total.textContent = `R${totalPrice.toFixed(2)}`;
+            quantity.textContent = count;
+        }
+        // Update localStorage with the latest cart and price
+        updateLocalStorage();
+    }
+
+    function changeQuantity(productId, change) {
+        let item = cart.find(item => item.productId === productId);
+        if (item) {
+            item.quantity += change;
+            if (item.quantity < 1) {
+                cart = cart.filter(item => item.productId !== productId);
+            }
+            reloadCart();
+        }
+    }
+
+    // Retrieve cart data and total price from localStorage
+    let storedCart = JSON.parse(localStorage.getItem('cart'));
+    let storedTotalPrice = localStorage.getItem('totalPrice');
+
+    // Display cart items and total price
+    let summaryList = document.querySelector('.summaryList');
+    let totalSpan = document.getElementById('totalPrice');
+
+    if (storedCart && storedCart.length > 0) {
+        storedCart.forEach(item => {
+            let listItem = document.createElement('li');
+            listItem.textContent = `${item.name} - R${(item.price * item.quantity).toFixed(2)} x ${item.quantity}`;
+            summaryList.appendChild(listItem);
+        });
+    }
+
+    if (storedTotalPrice) {
+        totalSpan.textContent = `R${storedTotalPrice.toFixed(2)}`;
+    }
+
+    // Add event listener to the payment button
+    let paymentBtn = document.getElementById('paymentBtn');
+    if (paymentBtn) {
+        paymentBtn.addEventListener('click', function() {
+            // Redirect to the payment page
+            window.location.href = 'lifestyle-delicios-web-App/templates/pay.html'; // Replace 'payment.html' with the URL of your payment page
+        });
+    }
+
+    // Add event listener to the menu button
+    let menuBtn = document.getElementById('menuBtn');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', function() {
+            // Redirect to the menu page
+            window.location.href = 'index.html'; // Replace 'menu.html' with the URL of your menu page
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Out</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text for contrast */
+        }
+        .card {
+            background-color: #333; /* Dark grey background */
+            border: none; /* Remove the default card border */
+        }
+        .card-header, .card-footer {
+            background-color: transparent; /* Make header and footer transparent */
+            border: none; /* Remove borders */
+            color: #fff; /* White text */
+        }
+        .card-body {
+            color: #fff; /* White text */
+        }
+        .btn-primary {
+            background-color: #dc3545; /* Bootstrap red color */
+            border: none; /* Remove border */
+        }
+        .btn-primary:hover {
+            background-color: #bb2d3b; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card text-center" style="width: 18rem;">
+        <div class="card-header">
+            Logged Out
+        </div>
+        <div class="card-body">
+            <p class="card-text">You have been logged out successfully. Please visit us again.</p>
+            <a href="/login" class="btn btn-primary">Log In Again</a>
+        </div>
+        <div class="card-footer text-muted">
+            Thank you for visiting.
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

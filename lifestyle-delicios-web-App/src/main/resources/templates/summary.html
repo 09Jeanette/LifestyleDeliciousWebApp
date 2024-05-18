@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Page - Lifestyle Delicios</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #343a40;
+            font-family: Arial, sans-serif;
+        }
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            font-size: 1.1rem;
+        }
+        .red-text {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .white-text {
+            color: #212529;
+        }
+        .yellow-text {
+            color: #ffc107;
+        }
+        .icon-bar {
+            font-size: 1.8em;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            font-size: 1.1rem;
+            padding: 12px 24px;
+            border-radius: 25px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .total-price {
+            font-size: 1.5rem; /* Adjust the font size as needed */
+        }
+
+    </style>
+</head>
+<body>
+<!-- Header with settings and profile icons -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/home">Lifestyle Delicios</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="settingsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-bar">⚙️</i> Settings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="red-text text-center my-4">Summary Page</h1>
+            <ul class="summaryList list-group"></ul>
+            <p class="red-text text-center" style="font-size: 1.5rem;">Total: <span id="totalPrice" class="total-price">R0.00</span></p>
+            <p class="yellow-text text-center">Please remember to take a screenshot of this page as proof of purchase!</p>
+            <div class="text-center my-4">
+                <a href="/pay" class="btn btn-danger">Proceed to Payment</a>
+                <a href="/menu" class="btn btn-outline-danger ml-3">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.7.9/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    let storedCart = JSON.parse(localStorage.getItem('cart'));
+    let storedTotalPrice = localStorage.getItem('totalPrice');
+    let summaryList = document.querySelector('.summaryList');
+    let totalSpan = document.getElementById('totalPrice');
+
+    if (storedCart && storedCart.length > 0) {
+        storedCart.forEach(item => {
+            let listItem = document.createElement('li');
+            listItem.classList.add('list-group-item', 'white-text');
+            listItem.textContent = `${item.productName} - R${(item.price * item.quantity).toFixed(2)} x ${item.quantity}`;
+            summaryList.appendChild(listItem);
+        });
+    }
+
+    if (storedTotalPrice) {
+        totalSpan.textContent = `R${parseFloat(storedTotalPrice).toFixed(2)}`;
+    }
+</script>
+</body>
+</html>
