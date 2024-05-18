@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In Page</title>
+  <!-- Link to Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Link to your custom CSS -->
+  <style>
+    body {
+      background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 0, 0, 1) 50%, rgba(255, 255, 255, 1) 100%);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body::after {
+      content: "";
+      opacity: 0.7;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .register-container {
+      width: 25%;
+      padding: 16px;
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+      margin: 0 auto;
+      margin-top: 100px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .register-container h1 {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .register-container input[type=email],
+    .register-container input[type=password],
+    .register-container input[type=text] { /* Added styling for username field */
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .register-container button {
+      background-color: red;
+      opacity: 0.8;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .register-container button:hover {
+      opacity: 0.6;
+    }
+
+    .register-container .login {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      color: red;
+      opacity: 0.8;
+      text-decoration: none;
+    }
+    .register-container input[type=text],
+    .register-container input[type=tel] { /* Added styling for phone number field */
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+<div class="register-container">
+  <h1>Sign Up</h1>
+  <!-- Bootstrap alert for error messages -->
+  <div th:if="${registrationError}" class="alert alert-danger" role="alert">
+    <p th:text="${registrationError}">User already exist. Please try again.</p>
+  </div>
+
+  <form action="/sign_in" method="POST" th:object="${registerRequest}" class="needs-validation" novalidate>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Name" name="name" required>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Surname" name="surname" required>
+    </div>
+    <div class="form-group">
+      <input type="tel" class="form-control" placeholder="Phone Number" name="phoneNumber" pattern="^\+?\d{0,10}" title="Phone number must be up to 10 digits long." required>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Username" name="login" required>
+    </div>
+    <div class="form-group">
+      <input type="email" class="form-control" placeholder="Email" name="email" required>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Password must contain at least one digit, one lowercase letter, one uppercase letter, and be at least 8 characters long." required>
+    </div>
+    <!-- Button with Bootstrap CSS -->
+    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+    <div class="text-center mt-3">
+    <a href="/login" class="btn btn-link mt-2">Already have an account? Login</a>
+    </div>
+  </form>
+</div>
+<!-- Link to Bootstrap JS and any additional scripts -->
+<script src="js/bootstrap.bundle.js"></script>
+</body>
+</html>

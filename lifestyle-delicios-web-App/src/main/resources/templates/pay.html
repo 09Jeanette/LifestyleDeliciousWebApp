@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifestyle Delicious - Payment</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Your CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+      background: linear-gradient(to right, #87CEEB 0%, #FF6347 100%);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 100px auto 0; /* Adjusted margin to move the container down */
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      transition: margin-top 0.5s ease-in-out; /* Added transition for smooth movement */
+    }
+
+    h1 {
+      font-size: 36px; /* Larger font size */
+      color: #333; /* Dark color */
+      text-align: center; /* Center align */
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center; /* Align icon vertically */
+      justify-content: center; /* Center icon horizontally */
+    }
+
+    .payment-icon {
+      font-size: 36px;
+      margin-right: 10px;
+    }
+
+    .payment-option {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    .button i {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+<!-- Fixed top navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <!-- Nav items for About Us and Contact Us -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact Us</a>
+      </li>
+    </ul>
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Dropdown and other links -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-gear-fill"></i> Settings
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+            <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <h1><i class="fas fa-credit-card payment-icon"></i>Choose a Payment Method</h1>
+  <div class="payment-option">
+    <button class="button" onclick="sendWhatsAppMessage('27608174182', 'Pay at counter')"><i class="fas fa-money-bill-wave"></i>Pay at the Counter</button>
+  </div>
+  <div class="payment-option">
+    <button class="button" onclick="sendWhatsAppMessage('27608174182', 'Upload Proof of Payment')"><i class="fas fa-upload"></i>Upload Proof of Payment</button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function sendWhatsAppMessage(number, message) {
+    var encodedMessage = encodeURIComponent(message);
+    var whatsappLink = "https://wa.me/" + number + "?text=" + encodedMessage;
+    window.open(whatsappLink, '_blank');
+  }
+</script>
+</body>
+</html>
